@@ -52,6 +52,10 @@ public class Parser
                 // note: we just ignore the rest of the input line.
             }
         }
+        
+        if(word1.equals("go") && word2.equals("back")){
+            return new Command("back", null);
+        }
 
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
@@ -63,7 +67,7 @@ public class Parser
         }
     }
 
-    /**
+    /**a
      * Print out a list of valid command words.
      */
     public void showCommands()
