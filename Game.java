@@ -20,6 +20,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Room previousRoom; 
+    private Player player;
     /**
      * Create the game and initialise its internal map.
      */
@@ -27,6 +28,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        //player = new Player(currentRoom);
     }
 
     /**
@@ -64,10 +66,10 @@ public class Game
         theater.addItem(new Item("tv", 1.5));
         lab.addItem(new Item("glasses",0.2));
 
-        currentRoom = outside;  // start game outside
+        currentRoom= outside;  // start game outside
     }
 
-    /**
+    /*
      *  Main play routine.  Loops until end of play.
      */
     public void play() 
@@ -125,6 +127,12 @@ public class Game
         else if (commandWord.equals("back")) {
             back();
         }
+        else if (commandWord.equals("take")) {
+            take(command);
+        } else if (commandWord.equals("drop")) {
+            drop(command);
+        }
+        
         // else command not recognised.
         return wantToQuit;
     }
@@ -143,6 +151,52 @@ public class Game
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
+    }
+    
+    private void take(Command command){
+        if(!command.hasSecondWord()){
+            System.out.println("Take what?");
+            return;
+        }
+        String itemName = command.getSecondWord();
+        Item itemToTake = null;
+        for(Item item : player.getCurrentRoom().getItems()){
+            if(item.getName().equalsIgnoreCase(itemName)){
+                itemToTake = item;
+                break;
+            }
+        }
+        if(itemToTake != null){
+            player.addItem(itemToTake);
+            player.getCurrentRoom().removeItem(itemToTake);
+            System.out.println("you have taken the " + itemToTake.getName());
+        }
+        else{
+            System.out.println("There is no such item here.");
+        }
+    }
+    
+    private void drop(Command command){
+        if(!command.hasSecondWord()){
+            System.out.println("Drop what?");
+            return;
+        }
+        String itemName = command.getSecondWord();
+        Item itemToDrop = null;
+        for(Item item : player.getInventory()){
+            if(item.getName().equalsIgnoreCase(itemName)){
+                itemToDrop = item;
+                break;
+            }
+        }
+        if(itemToDrop != null){
+            player.removeItem(itemToDrop);
+            player.getCurrentRoom().addItem(itemToDrop);
+            System.out.println("YOu have droped the" + itemToDrop.getName());
+        }
+        else{
+            System.out.println("You don't have that item.");
+        }
     }
     
     private void back(){

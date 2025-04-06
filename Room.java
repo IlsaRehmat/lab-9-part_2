@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
+
 /**
  * Class Room - a room in an adventure game.
  *
@@ -21,7 +22,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
-    private ArrayList<Item> items;
+    private List<Item> items;
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -37,6 +38,18 @@ public class Room
     
     public void addItem(Item item){
         items.add(item);
+    }
+    
+    public void removeItem(Item item) {
+        items.remove(item);
+    }
+
+    public boolean containsItem(Item item) {
+        return items.contains(item);
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
     
     private String getItemString(){

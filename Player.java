@@ -15,8 +15,8 @@ public class Player
     
     public Player(String name, Room startingRoom){
         this.name = name;
-        this.currentRoom = startingRoom;
-        this.inventory = new ArrayList<>();
+        currentRoom = startingRoom;
+        inventory = new ArrayList<>();
     }
     
     public Room getCurrentRoom(){
@@ -39,7 +39,7 @@ public class Player
         inventory.add(item);
     }
     
-    public void removeitem(Item item){
+    public void removeItem(Item item){
         inventory.remove(item);
     }
 }

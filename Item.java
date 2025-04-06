@@ -18,14 +18,19 @@ public class Item
 {
     private String description;
     private double weight; 
-
+    private String name;
     public Item(String description, double weight) {
         this.description = description;
         this.weight = weight;
+        this.name = name;
     }
 
     public String getDescription() {
         return description;
+    }
+    
+    public String getName(){
+        return name;
     }
 
     public double getWeight() {
