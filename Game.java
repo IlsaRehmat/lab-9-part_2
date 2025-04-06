@@ -56,11 +56,13 @@ public class Game
         lab.setExit("east", office);
 
         office.setExit("west", lab);
-        
+         
         // add items
-        theater.setItem(new Item("script book", 1.2));
-        pub.setItem(new Item("mug", 0.5));
-        lab.setItem(new Item("keyboard", 0.8));
+        theater.addItem(new Item("script book", 1.2));
+        pub.addItem(new Item("mug", 0.5));
+        lab.addItem(new Item("keyboard", 0.8));
+        theater.addItem(new Item("tv", 1.5));
+        lab.addItem(new Item("glasses",0.2));
 
         currentRoom = outside;  // start game outside
     }
